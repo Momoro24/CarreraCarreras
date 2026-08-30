@@ -15,8 +15,11 @@
         th, td { border: 1px solid #c7c7c7; padding-top: 1.5vh; padding-left: 1.5vw; padding-bottom: 1.5vh; text-align: left; font-size: 3vh; overflow-wrap: normal;white-space: normal}
         th:nth-child(2) { background-color: #0039a6; color: rgb(255, 255, 255); }
         th:nth-child(3) { background-color: #617db1; color: rgb(255, 255, 255); }
-
         tr:nth-child(even) { background-color: #f8f9fa; }
+        th,tr:nth-child(1) { background-color: #dfe300; color: rgb(0, 0, 0);
+        th,tr:nth-child(2) { background-color: #3b3b3b; color: rgb(255 255, 255);
+        th,tr:nth-child(3) { background-color: #cd7F32; color: rgb(0, 0, 0);
+
     </style>
     
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -47,9 +50,6 @@
 
                 const rows = csvText.split(/\r?\n/).map(row => row.trim()).filter(row => row.length > 0);
 
-                if (rows.length === 0) {
-                    throw new Error("El archivo CSV se descargó pero parece estar vacío.");
-                }
 
                 rows.forEach((rowText, index) => {
                     const cells = rowText.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
