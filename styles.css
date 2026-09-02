@@ -1,12 +1,12 @@
 /* Colorimetría: gris medio + rosa pastel */
 :root {
     --gris-medio: #6B6B6B;
-    --gris-oscuro: #4A4A4A;
+    --gris-oscuro: #3F3F3F;
     --rosa-pastel: #F8C8DC;
-    --rosa-suave: #FCE4EC;
+    --rosa-suave: #FDF2F7;
     --rosa-acento: #E8A0BF;
     --blanco: #FFFFFF;
-    --texto: #333333;
+    --texto: #2D2D2D;
 }
 
 * {
@@ -16,7 +16,7 @@
 body {
     font-family: "Montserrat", "Inter", sans-serif;
     margin: 0;
-    padding: 2vh 2%;
+    padding: 2.5vh 2.5%;
     line-height: 1.4;
     color: var(--texto);
     background-image: url('fondo.jpg');
@@ -27,30 +27,30 @@ body {
     min-height: 100vh;
 }
 
-/* Capa blanca semitransparente para que se lea bien el texto */
+/* Capa suave para legibilidad */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.58);
     z-index: -1;
 }
 
 .header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
 }
 
 .floated-image {
     float: left;
     width: 10vi;
-    max-width: 120px;
-    padding-top: 0.5vh;
-    padding-right: 1.5vw;
+    max-width: 115px;
+    padding-top: 0.4vh;
+    padding-right: 1.6vw;
     padding-bottom: 1vw;
 }
 
 h1 {
-    font-size: clamp(1.8rem, 6vi, 3.5rem);
+    font-size: clamp(1.9rem, 6vi, 3.4rem);
     line-height: 1.1;
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
@@ -60,26 +60,27 @@ h1 {
 }
 
 h2 {
-    font-size: clamp(1.1rem, 3vi, 1.8rem);
-    margin: 0.5rem 0 0 0.5%;
+    font-size: clamp(1.1rem, 3vi, 1.7rem);
+    margin: 0.45rem 0 0 0.5%;
     font-weight: 600;
     color: var(--gris-medio);
 }
 
 #status-box {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 12px;
+    padding: 13px 18px;
+    border-radius: 12px;
+    margin-bottom: 16px;
     font-weight: 600;
     background-color: var(--rosa-suave);
     color: var(--gris-oscuro);
     border: 1px solid var(--rosa-pastel);
+    box-shadow: 0 4px 15px rgba(232, 160, 191, 0.15);
 }
 
 .box {
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
     font-weight: 600;
 }
 
@@ -89,69 +90,122 @@ h2 {
     border: 1px solid #f5c6cb;
 }
 
+/* ===== TABLA COOL ===== */
 .table-container {
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 12px;
-    padding: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.10),
+        0 2px 8px rgba(232, 160, 191, 0.12);
+    overflow: hidden;
+    border: 1px solid rgba(248, 200, 220, 0.4);
 }
 
 table {
-    border-collapse: collapse;
-    background: var(--blanco);
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 14px;
     overflow: hidden;
+    background: transparent;
 }
 
 th, td {
-    border: 1px solid #d0d0d0;
-    padding: 1.4vh 1.2vh;
+    padding: 1.5vh 1.4vh;
     text-align: left;
-    font-size: clamp(0.85rem, 2.8vh, 1.35rem);
+    font-size: clamp(0.9rem, 2.7vh, 1.3rem);
+    border: none;
+    transition: background 0.25s ease;
 }
 
-/* Encabezados */
-th:nth-child(1),
-th:nth-child(2) {
-    background-color: var(--gris-medio);
+/* Encabezados con degradado */
+th {
+    background: linear-gradient(135deg, #6B6B6B, #555555);
     color: white;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    font-size: clamp(0.8rem, 2.4vh, 1.15rem);
+    padding-top: 1.7vh;
+    padding-bottom: 1.7vh;
 }
 
 th:nth-child(3) {
-    background-color: var(--rosa-acento);
-    color: white;
+    background: linear-gradient(135deg, #E8A0BF, #D48AA8);
 }
 
-/* Filas alternadas */
+/* Filas */
+tr {
+    background: rgba(255, 255, 255, 0.75);
+}
+
 tr:nth-child(even) {
-    background-color: var(--rosa-suave);
+    background: rgba(253, 242, 247, 0.9);
 }
 
-/* 1°, 2° y 3° lugar */
+/* Efecto hover */
+tr:hover td {
+    background: rgba(248, 200, 220, 0.35);
+}
+
+/* ===== Posiciones especiales (más elegantes) ===== */
+
+/* 1er lugar */
 tr:nth-child(2) {
-    background-color: #FFE082;
-    font-style: italic;
+    background: linear-gradient(90deg, #FFF3C4, #FFE082) !important;
     font-weight: 700;
     color: #4A3B00;
 }
 
+tr:nth-child(2) td {
+    border-top: 2px solid #F5D76E;
+}
+
+/* 2do lugar */
 tr:nth-child(3) {
-    background-color: #B0B0B0;
-    color: #222;
+    background: linear-gradient(90deg, #E8E8E8, #C8C8C8) !important;
     font-weight: 600;
+    color: #2A2A2A;
 }
 
+/* 3er lugar */
 tr:nth-child(4) {
-    background-color: #D4A574;
-    color: #3A2A1A;
+    background: linear-gradient(90deg, #F0D5B8, #D4A574) !important;
     font-weight: 600;
+    color: #3A2A1A;
 }
 
+/* Bordes redondeados sutiles en las esquinas de la tabla */
+th:first-child {
+    border-top-left-radius: 12px;
+}
+th:last-child {
+    border-top-right-radius: 12px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
+    body {
+        padding: 1.8vh 3%;
+    }
+
     .floated-image {
         width: 18vw;
         max-width: 80px;
+    }
+
+    th, td {
+        padding: 1.2vh 1vh;
+        font-size: 0.9rem;
     }
 }
