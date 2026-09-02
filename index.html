@@ -1,83 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puntuaciones</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
-    <meta charset="UTF-8">
-    <title>Puntuaciones</title>
-    <style>
-        body { font-family: "Inter", sans-serif; margin-left: 2%;margin-right: 2%;margin-top: 2vh; line-height: auto;background-color: #eeeeee;}
-        .box { padding: 5px; border-radius: 5px; margin-bottom: 2px; font-weight: bold; }
-        .floated-image{float:left; width:10vi; padding-top:0.5vh; padding-right:1vw; padding-bottom:2.5vw}
-        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;}
-        table { border-collapse: collapse; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.15);flex:1; width: 100%;}
-        th, td { border: 1px solid #c7c7c7; padding-top: 1.5vh; padding-left: 1.2vh;padding-right: 1.2vh; padding-bottom: 1.5vh; text-align: left; font-size: 3vh; overflow-wrap: normal;white-space: normal}
-        th:nth-child(1) { background-color: #0039a6; color: rgb(255, 255, 255); }
-        th:nth-child(2) { background-color: #0039a6; color: rgb(255, 255, 255); }
-        th:nth-child(3) { background-color: #617db1; color: rgb(255, 255, 255); }
-        tr:nth-child(even) { background-color: #eeeeee; }
-        tr:nth-child(2) { background-color: #f7e200; font-style: italic; font-weight: bold}
-        tr:nth-child(3) { background-color: #797979; color: #ffffff;}
-        tr:nth-child(4) { background-color: #ba7027; color: rgb(255, 255, 255);}
-
-    </style>
-    
+    <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <div> <img class="floated-image" src="Krevo.png" alt="krevo">
-    <h1 style="font-style: italic ; font-size:6vi; line-height: 100%; font-family: 'Montserrat', sans-serif; font-weight: 900; font-style: normal;letter-spacing: -2px; width:100%; overflow-wrap: normal;white-space: normal; margin-bottom: 0%;margin-top: 0%;">CARRERA DE CARRERAS</h1>
-    <h2 style="font-size: 3vi; line-height: 50%; margin-top: 2%; margin-left: 0.5%">Tabla de posiciones </h2>
+    <div class="header">
+        <img class="floated-image" src="Krevo.png" alt="krevo">
+        <h1>CARRERA DE CARRERAS</h1>
+        <h2>Tabla de posiciones</h2>
     </div>
+
     <div id="status-box">Procesando información de la hoja...</div>
-    <table id="data-table"></table>
     
-    <script>
+    <div class="table-container">
+        <table id="data-table"></table>
+    </div>
 
-        const urlFinal = `https://docs.google.com/spreadsheets/d/1Rw3_0rD4yxnBG-CRLSBBKEjkUK2f9-gJ4ZIqQNSGEfQ/export?format=csv` ;
-
-            async function loadSheetData() {
-            const statusBox = document.getElementById('status-box');
-            const table = document.getElementById('data-table');
-
-
-            try {
-                const response = await fetch(urlFinal);
-                if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
-                
-                const csvText = await response.text();
-                
-                table.innerHTML = "";
-
-                const rows = csvText.split(/\r?\n/).map(row => row.trim()).filter(row => row.length > 0);
-
-
-                rows.forEach((rowText, index) => {
-                    const cells = rowText.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
-                    const rowElement = document.createElement('tr');
-
-                    cells.forEach(cellText => {
-                        
-                        const cellElement = document.createElement(index === 0 ? 'th' : 'td');
-                        cellElement.textContent = cellText;
-                        rowElement.appendChild(cellElement);
-                    });
-
-                    table.appendChild(rowElement);
-                });
-
-                statusBox.style.display="none";
-
-            } catch (error) {
-                statusBox.className = "box error";
-                statusBox.innerHTML = `Error interno del lector: <code>${error.message}</code>`;
-                console.error("Detalle del error:", error);
-            }
-        }
-
-        loadSheetData();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
